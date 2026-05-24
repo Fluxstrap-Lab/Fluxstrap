@@ -36,9 +36,9 @@
     <Resource Include="Resources\MessageBox\Information.png" />
     <Resource Include="Resources\MessageBox\Question.png" />
     <Resource Include="Resources\MessageBox\Warning.png" />
-    <Resource Include="Resources\Bloxstrap.png" />
-    <Resource Include="Resources\Bloxstrap-full-dark.png" />
-    <Resource Include="Resources\Bloxstrap-full-light.png" />
+    <Resource Include="Resources\Fluxstrap.png" />
+    <Resource Include="Resources\Fluxstrap-full-dark.png" />
+    <Resource Include="Resources\Fluxstrap-full-light.png" />
     <EmbeddedResource Include="UI\Style\Editor-Theme-Dark.xshd" />
     <EmbeddedResource Include="UI\Style\Editor-Theme-Light.xshd" />
     <EmbeddedResource Include="UI\Style\Editor-Theme-Blue.xshd" />
