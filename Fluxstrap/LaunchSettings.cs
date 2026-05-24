@@ -115,7 +115,7 @@ namespace Fluxstrap
                     continue;
                 }
 
-                string identifier = arg[1..];
+                string identifier = arg.TrimStart('-');
 
                 if (!flagMap.TryGetValue(identifier, out LaunchFlag? flag) || flag is null)
                 {

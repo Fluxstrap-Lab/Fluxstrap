@@ -63,7 +63,7 @@ Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: de
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
 
 [UninstallRun]
-Filename: "{app}\{#MyAppExeName}"; Parameters: "--uninstall"; Flags: runhidden
+Filename: "{app}\{#MyAppExeName}"; Parameters: "--uninstall --quiet"; Flags: runhidden; RunOnceId: "UninstallFluxstrap"
 
 [Code]
 function InitializeUninstall(): Boolean;
