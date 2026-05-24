@@ -5,7 +5,7 @@
 #define MyAppName "Fluxstrap"
 #define MyAppVersion "2.11.3"
 #define MyAppPublisher "Fluxstrap"
-#define MyAppURL "https://github.com/anomalyco/Fluxstrap"
+#define MyAppURL "https://github.com/Fluxstrap-Lab/Fluxstrap"
 #define MyAppExeName "Fluxstrap.exe"
 
 [Setup]
@@ -45,13 +45,11 @@ Name: "nl"; MessagesFile: "compiler:Languages\Dutch.isl"
 Name: "pl"; MessagesFile: "compiler:Languages\Polish.isl"
 Name: "ja"; MessagesFile: "compiler:Languages\Japanese.isl"
 Name: "ko"; MessagesFile: "compiler:Languages\Korean.isl"
-Name: "zh_CN"; MessagesFile: "compiler:Languages\ChineseSimplified.isl"
-Name: "zh_TW"; MessagesFile: "compiler:Languages\ChineseTraditional.isl"
 Name: "ar"; MessagesFile: "compiler:Languages\Arabic.isl"
 
 [Tasks]
-Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: checkedonce
-Name: "startmenuicon"; Description: "{cm:CreateStartMenuIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: checkedonce
+Name: "desktopicon"; Description: "Create a &desktop shortcut"; GroupDescription: "Additional icons:"; Flags: checkedonce
+Name: "startmenuicon"; Description: "Create a &Start Menu shortcut"; GroupDescription: "Additional icons:"; Flags: checkedonce
 
 [Files]
 Source: "Release\fdd\Fluxstrap.exe"; DestDir: "{app}"; Flags: ignoreversion
