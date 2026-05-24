@@ -1,0 +1,72 @@
+<ui:UiPage x:Class="Fluxstrap.UI.Elements.Settings.Pages.GoodbyeDPIPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      xmlns:controls="clr-namespace:Fluxstrap.UI.Elements.Controls"
+      xmlns:dmodels="clr-namespace:Fluxstrap.UI.ViewModels.Settings"
+      xmlns:resources="clr-namespace:Fluxstrap.Resources"
+      d:DataContext="{d:DesignInstance dmodels:GoodbyeDPIViewModel, IsDesignTimeCreatable=True}"
+      mc:Ignorable="d"
+      d:DesignHeight="600" d:DesignWidth="800"
+      Title="GoodbyeDPIPage"
+      Scrollable="True">
+
+    <StackPanel Margin="0,0,14,14">
+        <TextBlock Text="{x:Static resources:Strings.Menu_GoodbyeDPI_Description}" FontSize="14" Foreground="{DynamicResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" Margin="0,0,0,16" />
+
+        <ui:Card Margin="0,0,0,12" Padding="16">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Ellipse Grid.Row="0" Grid.Column="0" Width="16" Height="16" Fill="{Binding StatusColor}" Margin="0,0,12,0" VerticalAlignment="Center" />
+                <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
+                    <TextBlock Text="{x:Static resources:Strings.Menu_GoodbyeDPI_Status}" FontSize="14" FontWeight="SemiBold" />
+                    <TextBlock Text="{Binding StatusText}" FontSize="12" Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal">
+                    <ui:Button Margin="0,0,8,0" Icon="Play24" Content="{x:Static resources:Strings.Menu_GoodbyeDPI_Start}" Command="{Binding StartCommand}" IsEnabled="{Binding CanStart}" />
+                    <ui:Button Icon="Stop24" Content="{x:Static resources:Strings.Menu_GoodbyeDPI_Stop}" Command="{Binding StopCommand}" IsEnabled="{Binding CanStop}" Appearance="Danger" />
+                </StackPanel>
+
+                <controls:OptionControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,12,0,0" Padding="0"
+                    Header="{x:Static resources:Strings.Menu_GoodbyeDPI_AutoStart}"
+                    Description="{x:Static resources:Strings.Menu_GoodbyeDPI_AutoStart_Description}">
+                    <ui:ToggleSwitch IsChecked="{Binding AutoStartWithRoblox, Mode=TwoWay}" />
+                </controls:OptionControl>
+
+                <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal" Margin="0,8,0,0">
+                    <ui:Button Icon="Folder24" Content="{x:Static resources:Strings.Menu_GoodbyeDPI_OpenFolder}" Command="{Binding OpenFolderCommand}" Margin="0,0,8,0" />
+                    <ui:Button Icon="Document24" Content="{x:Static resources:Strings.Menu_GoodbyeDPI_ClearLog}" Command="{Binding ClearLogCommand}" />
+                </StackPanel>
+            </Grid>
+        </ui:Card>
+
+        <ui:Card Padding="12">
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="{x:Static resources:Strings.Menu_GoodbyeDPI_Log}" FontSize="14" FontWeight="SemiBold" VerticalAlignment="Center" />
+                </Grid>
+                <Border Margin="0,8,0,0" Background="{DynamicResource ControlFillColorDefaultBrush}" Padding="8" MaxHeight="350">
+                    <ScrollViewer>
+                        <TextBlock Text="{Binding Log}" FontFamily="Consolas" FontSize="11" TextWrapping="Wrap" />
+                    </ScrollViewer>
+                </Border>
+            </StackPanel>
+        </ui:Card>
+    </StackPanel>
+</ui:UiPage>

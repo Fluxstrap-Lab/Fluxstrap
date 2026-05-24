@@ -1,0 +1,13 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <SolidColorBrush x:Key="NewTextEditorBackground" Color="White" />
+    <SolidColorBrush x:Key="NewTextEditorForeground" Color="Black" />
+    <SolidColorBrush x:Key="NewTextEditorLink" Color="#C09104" />
+
+    <Color x:Key="FluxstrapAccentColor">#C09104</Color>
+    <Color x:Key="FluxstrapAccentColorLight">#D4A814</Color>
+    <Color x:Key="FluxstrapAccentColorDark">#A67A00</Color>
+
+    <SolidColorBrush x:Key="FluxstrapAccentBrush" Color="#C09104" />
+    <SolidColorBrush x:Key="FluxstrapAccentBrushLight" Color="#D4A814" />
+    <SolidColorBrush x:Key="FluxstrapAccentBrushDark" Color="#A67A00" />
+</ResourceDictionary>

@@ -1,0 +1,471 @@
+<Window x:Class="Fluxstrap.UI.Elements.Overlay.GameOverlayWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:resources="clr-namespace:Fluxstrap.Resources"
+        Title="Fluxstrap Overlay"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ShowInTaskbar="False"
+        ShowActivated="False"
+        Focusable="False">
+
+    <Window.Resources>
+        <Color x:Key="AccentColor">#00A2FF</Color>
+        <Color x:Key="AccentGlowColor">#4000A2FF</Color>
+        <Color x:Key="GreenColor">#00E676</Color>
+        <Color x:Key="YellowColor">#FFD600</Color>
+        <Color x:Key="RedColor">#FF5252</Color>
+        <Color x:Key="TextPrimary">#F0F0F0</Color>
+        <Color x:Key="TextSecondary">#A0A0B0</Color>
+        <Color x:Key="TextDim">#606070</Color>
+        <Color x:Key="CardBg">#20FFFFFF</Color>
+        <Color x:Key="SurfaceBg">#0D1117</Color>
+
+        <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource AccentColor}"/>
+        <SolidColorBrush x:Key="GreenBrush" Color="{StaticResource GreenColor}"/>
+        <SolidColorBrush x:Key="YellowBrush" Color="{StaticResource YellowColor}"/>
+        <SolidColorBrush x:Key="RedBrush" Color="{StaticResource RedColor}"/>
+        <SolidColorBrush x:Key="TextPrimaryBrush" Color="{StaticResource TextPrimary}"/>
+        <SolidColorBrush x:Key="TextSecondaryBrush" Color="{StaticResource TextSecondary}"/>
+        <SolidColorBrush x:Key="TextDimBrush" Color="{StaticResource TextDim}"/>
+        <SolidColorBrush x:Key="CardBgBrush" Color="{StaticResource CardBg}"/>
+
+        <Style x:Key="CardStyle" TargetType="Border">
+            <Setter Property="Background" Value="#18FFFFFF"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Padding" Value="16"/>
+            <Setter Property="BorderBrush" Value="#10FFFFFF"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#22FFFFFF"/>
+                    <Setter Property="BorderBrush" Value="#20FFFFFF"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="ActionButton" TargetType="Border">
+            <Setter Property="Background" Value="#15FFFFFF"/>
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="ToolTip" Value="{x:Static resources:Strings.Overlay_ToggleFps}"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#25FFFFFF"/>
+                    <Setter Property="BorderBrush" Value="#1500A2FF"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="MediaButton" TargetType="Border">
+            <Setter Property="Background" Value="#12FFFFFF"/>
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="Padding" Value="0,10"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#2200A2FF"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="SectionLabel" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#70808090"/>
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
+        </Style>
+
+        <Style x:Key="DangerButton" TargetType="Border">
+            <Setter Property="Background" Value="#18FF5252"/>
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="Padding" Value="16,7"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="BorderBrush" Value="#30FF5252"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#30FF5252"/>
+                    <Setter Property="BorderBrush" Value="#50FF5252"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="ToggleStatusItem" TargetType="Border">
+            <Setter Property="Background" Value="#15FFFFFF"/>
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="Padding" Value="10,6"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Margin" Value="0,0,0,6"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#28FFFFFF"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Border Background="#E00D1117" CornerRadius="0">
+        <Border.Effect>
+            <DropShadowEffect Color="Black" BlurRadius="0" ShadowDepth="0" Opacity="0"/>
+        </Border.Effect>
+
+        <Grid Margin="40,28,40,20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Margin="0,0,0,24">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Border x:Name="LogoBorder" Width="36" Height="36" CornerRadius="10" Margin="0,0,12,0">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#00A2FF" Offset="0"/>
+                                <GradientStop Color="#7A39FB" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <TextBlock Text="F" Foreground="White" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="FLUXSTRAP" Foreground="#F0F0F0" FontSize="16" FontWeight="Bold"/>
+                        <TextBlock Text="{x:Static resources:Strings.Overlay_GameOverlay}" Foreground="#50808090" FontSize="8" FontWeight="SemiBold" Margin="0,-1,0,0"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock x:Name="ClockText" Text="00:00" Foreground="#F0F0F0" FontSize="42" FontWeight="ExtraLight" VerticalAlignment="Bottom"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,2,0,0">
+                        <TextBlock x:Name="GameNameText" Text="Roblox" Foreground="#A0A0B0" FontSize="12" FontWeight="SemiBold"/>
+                        <TextBlock Text="  ·  " Foreground="#404050" FontSize="12"/>
+                        <TextBlock x:Name="SessionChipText" Text="0 mins" Foreground="#70808090" FontSize="12"/>
+                        <TextBlock Text="  ·  " Foreground="#404050" FontSize="12"/>
+                        <TextBlock x:Name="RamText" Text="0 MB" Foreground="#70808090" FontSize="12"/>
+                        <TextBlock Text="  ·  " Foreground="#404050" FontSize="12"/>
+                        <TextBlock x:Name="ServerText" Text="..." Foreground="#70808090" FontSize="12"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+                    <Border Style="{StaticResource DangerButton}" Margin="0,0,10,0" MouseLeftButtonDown="ForceQuit_Click">
+                        <TextBlock x:Name="UI_ForceQuitLabel" Text="{x:Static resources:Strings.Overlay_ForceQuit}" Foreground="#FF5252" FontSize="11" FontWeight="Bold"/>
+                    </Border>
+                    <Border Background="#15FFFFFF" CornerRadius="6" Padding="16,7" Cursor="Hand" MouseLeftButtonDown="ReturnToGame_Click" BorderBrush="#10FFFFFF" BorderThickness="1">
+                        <TextBlock x:Name="UI_CloseLabel" Text="{x:Static resources:Strings.Overlay_Close}" Foreground="#A0A0B0" FontSize="11" FontWeight="SemiBold"/>
+                    </Border>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="290" />
+                    <ColumnDefinition Width="16" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="16" />
+                    <ColumnDefinition Width="280" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <Border Style="{StaticResource CardStyle}" Margin="0,0,0,12">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Row="0" Grid.Column="0" x:Name="UI_ActivityLabel" Text="{x:Static resources:Strings.Overlay_Activity}" Style="{StaticResource SectionLabel}"/>
+
+                            <Border Grid.Row="0" Grid.RowSpan="4" Grid.Column="1" Width="60" Height="60" CornerRadius="8" Background="#15FFFFFF" VerticalAlignment="Top" ClipToBounds="True">
+                                <Grid>
+                                    <TextBlock Text="🎮" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.3"/>
+                                    <Image x:Name="ActivityThumbnail" Stretch="UniformToFill"/>
+                                </Grid>
+                            </Border>
+
+                            <TextBlock Grid.Row="1" Grid.Column="0" x:Name="UI_NowPlayingLabel" Text="{x:Static resources:Strings.Overlay_NowPlaying}" Foreground="#50808090" FontSize="10" Margin="0,0,0,3"/>
+                            <TextBlock Grid.Row="2" Grid.Column="0" x:Name="ActivityGameName" Text="Roblox" Foreground="#F0F0F0" FontSize="14" FontWeight="SemiBold" Margin="0,0,12,0" TextTrimming="CharacterEllipsis"/>
+
+                            <Border Grid.Row="3" Grid.Column="0" Background="#1500A2FF" CornerRadius="5" Padding="12,6" Margin="0,10,12,0" Cursor="Hand" MouseLeftButtonDown="CopyInvite_Click" HorizontalAlignment="Left" BorderBrush="#2000A2FF" BorderThickness="1">
+                                <TextBlock x:Name="UI_CopyInviteLabel" Text="{x:Static resources:Strings.Overlay_CopyInvite}" Foreground="{StaticResource AccentBrush}" FontSize="10" FontWeight="Bold"/>
+                            </Border>
+                        </Grid>
+                    </Border>
+
+                    <Border Style="{StaticResource CardStyle}" Margin="0,0,0,12">
+                        <StackPanel>
+                            <TextBlock x:Name="UI_SystemMediaLabel" Text="{x:Static resources:Strings.Overlay_Media}" Style="{StaticResource SectionLabel}"/>
+                            <Grid Margin="0,0,0,12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" Width="44" Height="44" CornerRadius="6" Background="#15FFFFFF" Margin="0,0,12,0" ClipToBounds="True">
+                                    <Grid>
+                                        <TextBlock Text="🎵" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.3"/>
+                                        <Image x:Name="MediaThumbnail" Stretch="UniformToFill"/>
+                                    </Grid>
+                                </Border>
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                    <TextBlock x:Name="MediaTitleText" Text="No Media" Foreground="{StaticResource AccentBrush}" FontSize="13" FontWeight="SemiBold" TextTrimming="CharacterEllipsis"/>
+                                    <TextBlock x:Name="MediaArtistText" Text="" Foreground="#60808090" FontSize="10" TextTrimming="CharacterEllipsis"/>
+                                </StackPanel>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="6"/>
+                                    <ColumnDefinition Width="1.5*"/>
+                                    <ColumnDefinition Width="6"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" Style="{StaticResource MediaButton}" MouseLeftButtonDown="MediaPrev_Click">
+                                    <TextBlock Text="⏮" Foreground="#D0D0D0" FontSize="14" HorizontalAlignment="Center"/>
+                                </Border>
+                                <Border Grid.Column="2" Style="{StaticResource MediaButton}" MouseLeftButtonDown="MediaPlayPause_Click">
+                                    <TextBlock Text="⏯" Foreground="#D0D0D0" FontSize="16" HorizontalAlignment="Center"/>
+                                </Border>
+                                <Border Grid.Column="4" Style="{StaticResource MediaButton}" MouseLeftButtonDown="MediaNext_Click">
+                                    <TextBlock Text="⏭" Foreground="#D0D0D0" FontSize="14" HorizontalAlignment="Center"/>
+                                </Border>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Style="{StaticResource CardStyle}" Margin="0,0,0,0">
+                        <StackPanel>
+                            <TextBlock x:Name="UI_QuickActionsLabel" Text="{x:Static resources:Strings.Overlay_QuickActions}" Style="{StaticResource SectionLabel}"/>
+                            <Border Style="{StaticResource ActionButton}" Margin="0,0,0,6" MouseLeftButtonDown="Screenshot_Click">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="📸" FontSize="13" Margin="0,0,10,0"/>
+                                    <TextBlock x:Name="UI_ScreenshotLabel" Text="{x:Static resources:Strings.Overlay_TakeScreenshot}" Foreground="#D0D0D8" FontSize="11" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Border>
+                            <Border x:Name="RecordingButton" Style="{StaticResource ActionButton}" Margin="0,0,0,6" MouseLeftButtonDown="Recording_Click">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock x:Name="RecordingIcon" Text="⏺" FontSize="13" Margin="0,0,10,0"/>
+                                    <TextBlock x:Name="UI_RecordingLabel" Text="{x:Static resources:Strings.Overlay_StartRecording}" Foreground="#D0D0D8" FontSize="11" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Border>
+                            <Border Style="{StaticResource ActionButton}" Margin="0,0,0,6" MouseLeftButtonDown="OpenModDir_Click">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="📁" FontSize="13" Margin="0,0,10,0"/>
+                                    <TextBlock x:Name="UI_ModdingLabel" Text="{x:Static resources:Strings.Overlay_ModsFolder}" Foreground="#D0D0D8" FontSize="11" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Border>
+                            <Border Style="{StaticResource ActionButton}" Margin="0,0,0,6" MouseLeftButtonDown="OpenLogDir_Click">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="📄" FontSize="13" Margin="0,0,10,0"/>
+                                    <TextBlock x:Name="UI_LogsLabel" Text="{x:Static resources:Strings.Overlay_OpenRobloxLogs}" Foreground="#D0D0D8" FontSize="11" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Border>
+                            <Border Style="{StaticResource ActionButton}" Margin="0,0,0,0" MouseLeftButtonDown="OpenScreenshotsDir_Click">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="🖼️" FontSize="13" Margin="0,0,10,0"/>
+                                    <TextBlock x:Name="UI_ScreenshotsLabel" Text="{x:Static resources:Strings.Overlay_OpenScreenshots}" Foreground="#D0D0D8" FontSize="11" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+
+                <Grid Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="12"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0" Style="{StaticResource CardStyle}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" x:Name="UI_PerformanceLabel" Text="{x:Static resources:Strings.Overlay_Performance}" Style="{StaticResource SectionLabel}"/>
+
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" Margin="0,0,6,0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock x:Name="FpsText" Text="0" Foreground="{StaticResource GreenBrush}" FontSize="44" FontWeight="Bold" VerticalAlignment="Bottom"/>
+                                        <TextBlock x:Name="FpsUnitText" Text="{x:Static resources:Strings.Overlay_FpsUnit}" Foreground="{StaticResource GreenBrush}" FontSize="14" FontWeight="SemiBold" VerticalAlignment="Bottom" Margin="0,0,0,8"/>
+                                    </StackPanel>
+                                    <TextBlock x:Name="PingText" Foreground="#A0A0B0" FontSize="12" Margin="0,2,0,0"/>
+                                    <TextBlock x:Name="MemoryText" Foreground="#70808090" FontSize="11" Margin="0,2,0,0"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1" Margin="6,0,0,0">
+                                    <TextBlock x:Name="CpuText" Foreground="#A0A0B0" FontSize="12" Margin="0,2,0,0"/>
+                                    <TextBlock x:Name="GpuText" Foreground="#A0A0B0" FontSize="12" Margin="0,2,0,2"/>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </Border>
+
+                    <Grid Grid.Row="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Border Grid.Row="0" Style="{StaticResource CardStyle}" Margin="0,0,0,12">
+                            <StackPanel>
+                                <TextBlock x:Name="UI_FluxSettingsLabel" Text="{x:Static resources:Strings.Overlay_Status}" Style="{StaticResource SectionLabel}"/>
+                                <StackPanel x:Name="StatusStack">
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                                        <Ellipse x:Name="StatusDot_Running" Width="8" Height="8" Fill="{StaticResource GreenBrush}" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                                        <TextBlock x:Name="UI_CurrentStatusLabel" Text="{x:Static resources:Strings.Overlay_RunningSmoothly}" Foreground="#A0A0B0" FontSize="12"/>
+                                    </StackPanel>
+                                    <Border Style="{StaticResource ToggleStatusItem}" MouseLeftButtonDown="ToggleFpsUnlock_Click">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Ellipse x:Name="StatusDot_FPS" Width="8" Height="8" Fill="#50808090" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                                            <TextBlock x:Name="StatusText_FPS" Text="{x:Static resources:Strings.Overlay_FpsUnlockOff}" Foreground="#70808090" FontSize="12"/>
+                                        </StackPanel>
+                                    </Border>
+                                    <Border Style="{StaticResource ToggleStatusItem}" MouseLeftButtonDown="ToggleAntiAfk_Click">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Ellipse x:Name="StatusDot_AntiAFK" Width="8" Height="8" Fill="#50808090" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                                            <TextBlock x:Name="StatusText_AntiAFK" Text="{x:Static resources:Strings.Overlay_AntiAfkOff}" Foreground="#70808090" FontSize="12"/>
+                                        </StackPanel>
+                                    </Border>
+                                    <Border Style="{StaticResource ToggleStatusItem}" MouseLeftButtonDown="ToggleRpc_Click">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Ellipse x:Name="StatusDot_RPC" Width="8" Height="8" Fill="#50808090" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                                            <TextBlock x:Name="StatusText_RPC" Text="{x:Static resources:Strings.Overlay_RichPresenceOff}" Foreground="#70808090" FontSize="12"/>
+                                        </StackPanel>
+                                    </Border>
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                                        <Ellipse Width="8" Height="8" Fill="{StaticResource AccentBrush}" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                                        <TextBlock x:Name="UI_OverlayActiveLabel" Text="{x:Static resources:Strings.Overlay_OverlayActive}" Foreground="#A0A0B0" FontSize="12"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Grid.Row="1" Style="{StaticResource CardStyle}" Margin="0,0,0,12" x:Name="VolumeCard">
+                            <StackPanel>
+                                <TextBlock x:Name="UI_VolumeLabel" Text="{x:Static resources:Strings.Overlay_SystemVolume}" Style="{StaticResource SectionLabel}"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock x:Name="VolumeIconText" Text="🔊" FontSize="14" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                                    <Border Grid.Column="1" Height="20" CornerRadius="4" Background="#15FFFFFF" Cursor="Hand" MouseLeftButtonDown="VolumeSlider_Click">
+                                        <Border x:Name="VolumeFill" Height="20" CornerRadius="4" Background="#2000A2FF" HorizontalAlignment="Left" Width="100"/>
+                                    </Border>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Grid.Row="2" Style="{StaticResource CardStyle}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Text="FPS" Style="{StaticResource SectionLabel}"/>
+                                <Border Grid.Row="1" Height="60" CornerRadius="4" Background="#08FFFFFF" ClipToBounds="True">
+                                    <Grid>
+                                        <Line X1="0" Y1="60" X2="200" Y2="60" Stroke="#10FFFFFF" StrokeThickness="1" Stretch="Fill"/>
+                                        <Line X1="0" Y1="30" X2="200" Y2="30" Stroke="#10FFFFFF" StrokeThickness="0.5" Stretch="Fill"/>
+                                        <Polyline x:Name="FpsGraphLine" Stroke="{StaticResource AccentBrush}" StrokeThickness="1.5" StrokeLineJoin="Round" Fill="#1500A2FF" Stretch="Fill"/>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Column="4">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="12"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0" Style="{StaticResource CardStyle}" Padding="0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid Grid.Row="0" Margin="16,14,16,10">
+                                <TextBlock x:Name="UI_FriendsLabel" Text="{x:Static resources:Strings.Overlay_Friends}" Style="{StaticResource SectionLabel}" Margin="0"/>
+                                <Border Background="#1500E676" CornerRadius="4" Padding="8,3" HorizontalAlignment="Right" VerticalAlignment="Top">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Ellipse Width="6" Height="6" Fill="{StaticResource GreenBrush}" Margin="0,0,5,0" VerticalAlignment="Center"/>
+                                        <TextBlock x:Name="UI_OnlineLabel" Text="{x:Static resources:Strings.Overlay_Online}" Foreground="{StaticResource GreenBrush}" FontSize="9" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+
+                            <Border Grid.Row="1" Height="1" Background="#08FFFFFF"/>
+
+                            <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" Margin="0,0,0,0">
+                                <StackPanel x:Name="FriendsStack" Margin="16,10,16,10">
+                                    <TextBlock x:Name="UI_NoFriendsLabel" Text="{x:Static resources:Strings.Overlay_NoFriends}" Foreground="#40808090" FontStyle="Italic" FontSize="11" HorizontalAlignment="Center" Margin="0,20,0,0" TextWrapping="Wrap"/>
+                                </StackPanel>
+                            </ScrollViewer>
+                        </Grid>
+                    </Border>
+
+                    <Border Grid.Row="2" Style="{StaticResource CardStyle}">
+                        <StackPanel>
+                            <TextBlock x:Name="UI_ServerDetailsLabel" Text="{x:Static resources:Strings.Overlay_ServerDetails}" Style="{StaticResource SectionLabel}"/>
+                            <TextBlock x:Name="UI_PlaceIdLabel" Text="{x:Static resources:Strings.Overlay_PlaceId}" Foreground="#40808090" FontSize="9" Margin="0,0,0,2"/>
+                            <Border Background="#10FFFFFF" CornerRadius="4" Padding="8,5" Margin="0,0,0,8" Cursor="Hand" MouseLeftButtonDown="CopyPlaceId_Click">
+                                <TextBlock x:Name="PlaceIdText" Text="N/A" Foreground="#A0A0B0" FontSize="11"/>
+                            </Border>
+                            <TextBlock x:Name="UI_JobIdLabel" Text="{x:Static resources:Strings.Overlay_JobId}" Foreground="#40808090" FontSize="9" Margin="0,0,0,2"/>
+                            <Border Background="#10FFFFFF" CornerRadius="4" Padding="8,5" Cursor="Hand" MouseLeftButtonDown="CopyJobId_Click">
+                                <TextBlock x:Name="JobIdText" Text="N/A" Foreground="#A0A0B0" FontSize="9" TextWrapping="Wrap"/>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Grid>
+
+            <Border Grid.Row="2" Margin="0,20,0,0" HorizontalAlignment="Center"
+                    Background="#10FFFFFF" CornerRadius="8" Padding="50,12" Cursor="Hand"
+                    MouseLeftButtonDown="ReturnToGame_Click" BorderBrush="#08FFFFFF" BorderThickness="1">
+                <StackPanel HorizontalAlignment="Center">
+                    <TextBlock x:Name="UI_ReturnToGameLabel" Text="{x:Static resources:Strings.Overlay_ReturnToGame}" Foreground="#A0A0B0" FontSize="11" FontWeight="SemiBold" HorizontalAlignment="Center"/>
+                    <TextBlock x:Name="UI_ClickToCloseLabel" Text="{x:Static resources:Strings.Overlay_ClickToClose}" Foreground="#30808090" FontSize="9" HorizontalAlignment="Center" Margin="0,3,0,0"/>
+                </StackPanel>
+            </Border>
+
+            <Border x:Name="ScreenshotToast" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top"
+                    Background="#CC00A2FF" CornerRadius="8" Padding="24,10" Margin="0,20,0,0" Visibility="Collapsed">
+                <TextBlock x:Name="ToastText" Text="{x:Static resources:Strings.Overlay_ScreenshotSaved}" Foreground="White" FontSize="12" FontWeight="SemiBold"/>
+            </Border>
+        </Grid>
+    </Border>
+</Window>
